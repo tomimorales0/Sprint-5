@@ -1,0 +1,38 @@
+{
+    "clientes": [
+      {
+        "numero": 1,
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "dni": "12345678",
+        "tipo": "CLASSIC",
+        "transacciones": [
+          {
+            "estado": "RECHAZADA",
+            "tipo": "RETIRO_EFECTIVO_CAJERO_AUTOMATICO",
+            "cuentaNumero": "001",
+            "cupoDiarioRestante": 5000,
+            "monto": 20000,
+            "fecha": "01/10/2024 10:00:00",
+            "numero": 1001,
+            "saldoEnCuenta": 3000,
+            "totalTarjetasDeCreditoActualmente": 0,
+            "totalChequerasActualmente": 0
+          },
+          {
+            "estado": "ACEPTADA",
+            "tipo": "TRANSFERENCIA_ENVIADA",
+            "cuentaNumero": "002",
+            "cupoDiarioRestante": 15000,
+            "monto": 8000,
+            "fecha": "02/10/2024 12:00:00",
+            "numero": 1002,
+            "saldoEnCuenta": 15000,
+            "totalTarjetasDeCreditoActualmente": 1,
+            "totalChequerasActualmente": 0
+          }
+        ]
+      }
+    ]
+  }
+  
