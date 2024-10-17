@@ -56,4 +56,48 @@ class Transaccion:
             self.estado = "RECHAZADA"
             self.razon_rechazo = f"El monto de retiro supera el límite diario para clientes {tipo_cliente}."
 
-    
+    def validar_alta_tarjeta(self, tipo_cliente):
+        limites = {
+            "CLASSIC": 0,
+            "GOLD": 1,
+            "BLACK": 5
+        }
+        if self.totalTarjetasDeCreditoActualmente >= limites[tipo_cliente]:
+            self.estado = "RECHAZADA"
+            self.razon_rechazo = f"El cliente ya tiene el número máximo de tarjetas de crédito para su tipo de cuenta ({limites[tipo_cliente]})."
+
+    def validar_alta_chequera(self, tipo_cliente):
+        limites = {
+            "CLASSIC": 0,
+            "GOLD": 1,
+            "BLACK": 2
+        }
+        if self.totalChequerasActualmente >= limites[tipo_cliente]:
+            self.estado = "RECHAZADA"
+            self.razon_rechazo = f"El cliente ya tiene el número máximo de chequeras para su tipo de cuenta ({limites[tipo_cliente]})."
+
+    def validar_compra_dolar(self, tipo_cliente):
+        if tipo_cliente not in ["GOLD", "BLACK"]:
+            self.estado = "RECHAZADA"
+            self.razon_rechazo = "El cliente no tiene permitido comprar dólares."
+
+    def validar_transferencia_enviada(self, tipo_cliente):
+        comisiones = {
+            "CLASSIC": 0.01,
+            "GOLD": 0.005,
+            "BLACK": 0
+        }
+        saldo_requerido = self.monto + self.monto * comisiones[tipo_cliente]
+        if self.saldoEnCuenta < saldo_requerido:
+            self.estado = "RECHAZADA"
+            self.razon_rechazo = "Saldo insuficiente para realizar la transferencia con la comisión aplicada."
+
+    def validar_transferencia_recibida(self, tipo_cliente):
+        limites = {
+            "CLASSIC": 150000,
+            "GOLD": 500000,
+            "BLACK": float('inf')
+        }
+        if self.monto > limites[tipo_cliente]:
+            self.estado = "RECHAZADA"
+            self.razon_rechazo = f"El monto de la transferencia supera el límite permitido para clientes {tipo_cliente}."
