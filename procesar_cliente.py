@@ -103,7 +103,7 @@ class Transaccion:
             self.razon_rechazo = f"El monto de la transferencia supera el límite permitido para clientes {tipo_cliente}."
 
 
-# Función para generar el reporte HTML
+# F para generar el reporte HTML
 def generar_reporte_html(cliente):
     html = f"""
     <html>
@@ -158,9 +158,9 @@ def generar_reporte_html(cliente):
 def procesar_clientes(filename):
     with open(filename, 'r') as file:
         data = json.load(file)
-        for cliente_data in data['clientes']:  # Asegúrate de que estás accediendo a la lista de clientes
-            print("Datos del cliente:", cliente_data)  # Línea de depuración
-            cliente = Cliente(**cliente_data)  # Aquí se espera un diccionario
+        for cliente_data in data['clientes']:  
+            print("Datos del cliente:", cliente_data)  # Línea de depuración 
+            cliente = Cliente(**cliente_data)  
             cliente.procesar_transacciones()
             generar_reporte_html(cliente)
 
